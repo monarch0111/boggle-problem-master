@@ -1,7 +1,6 @@
 require "sinatra/base"
 require "sinatra/json"
 require "json"
-require "pry"
 
 require_relative "./concerns/response.rb"
 
