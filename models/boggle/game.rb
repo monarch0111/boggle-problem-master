@@ -85,8 +85,10 @@ module Boggle
     end
 
     def match_score(string, sub_string)
+      # Method uses String match function by converting wild-card string to a regex
       matched_data = string.match(sub_string.gsub("*", "\\w"))
       return 0 if matched_data.nil?
+      # score is ratio of total characters matched to total characters in the string
       matched_data[0].to_s.length.to_f / string.length.to_f
     end
 
