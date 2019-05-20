@@ -10,6 +10,7 @@ end
 
 class API < Sinatra::Base
   include Response
+  
   START_TIME = Time.now
 
   post '/games' do
@@ -41,10 +42,10 @@ class API < Sinatra::Base
 
   put '/games/:id' do |game_id|
     result = begin
-      @body_params = JSON.parse(request.body.read)
-      game = Boggle::Game.new(id: game_id, token: @body_params["token"])
+      body_params = JSON.parse(request.body.read)
+      game = Boggle::Game.new(id: game_id, token: body_params["token"])
       if game.errors.empty?
-        score = game.play(word: @body_params["word"])
+        score = game.play(word: body_params["word"])
         if score > 0
           response_body(code: 200, body: Boggle::Board.get(id: game_id))
         else
